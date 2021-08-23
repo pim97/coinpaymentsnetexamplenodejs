@@ -8,3 +8,5 @@ Using Sequelize as database library
 Cloudbuild for Google Cloud with Cloud Run
 
 Dockerfile for docker
+
+run 'gcloud builds submit' to deploy to Cloud Run
