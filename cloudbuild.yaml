@@ -1,0 +1,13 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'eu.gcr.io/toplistbot-production/coin-payments', '.']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'eu.gcr.io/toplistbot-production/coin-payments']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'coin-payments', '--image', 'eu.gcr.io/toplistbot-production/coin-payments', '--region', 'europe-west1', '--platform', 'managed', '--allow-unauthenticated', '--max-instances', '3', '--port', '3030']
+images:
+- eu.gcr.io/toplistbot-production/coin-payments
